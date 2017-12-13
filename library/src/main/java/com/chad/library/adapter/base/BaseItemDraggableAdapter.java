@@ -63,7 +63,7 @@ public abstract class BaseItemDraggableAdapter<T, K extends BaseViewHolder> exte
                 View toggleView = holder.getView(mToggleViewId);
                 if (toggleView != null) {
                     toggleView.setTag(R.id.BaseQuickAdapter_viewholder_support, holder);
-                    if (mDragOnLongPress) {
+                    if (mDragOnLongPress && position != getFixPosition()) {
                         toggleView.setOnLongClickListener(mOnToggleViewLongClickListener);
                     } else {
                         toggleView.setOnTouchListener(mOnToggleViewTouchListener);
@@ -259,5 +259,9 @@ public abstract class BaseItemDraggableAdapter<T, K extends BaseViewHolder> exte
 
     private boolean inRange(int position) {
         return position >= 0 && position < mData.size();
+    }
+
+    public int getFixPosition() {
+        return -1;
     }
 }
